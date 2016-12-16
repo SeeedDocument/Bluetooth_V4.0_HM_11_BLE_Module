@@ -9,7 +9,7 @@ sku:     317030001
 ---
 ![](https://github.com/SeeedDocument/Bluetooth_V4.0_HM_11_BLE_Module/raw/master/img/HM-11%20BLE%20Module.jpg)
 
-This is a SMD BLE module used in our BLE Bee and Xadow BLE. It is based on TI cc2541 chip, enables robust network nodes to be built with low total bill-of-material costs and highly suited for ultralow power consumption systems. The module is small and easy to use, with the preprogrammed firmware of manufacturer, you could quickly build BLE communications via its AT command. Supporting BLE communications with iphone, ipad and Android 4.3.
+This is a SMD BLE module used in our BLE Bee and Xadow BLE. It is based on TI CC2541 chip, enables robust network nodes to be built with low total bill-of-material costs and highly suited for ultralow power consumption systems. The module is small and easy to use, with the preprogrammed firmware of manufacturer, you could quickly build BLE communications via its AT command. Supporting BLE communications with iphone, ipad and Android 4.3.
 
 [![](https://github.com/SeeedDocument/Seeed-WiKi/raw/master/docs/images/300px-Get_One_Now_Banner-ragular.png)](https://www.seeedstudio.com/Bluetooth-V4.0-HM-11-BLE-Module-p-1803.html)
 
@@ -29,7 +29,7 @@ This is a SMD BLE module used in our BLE Bee and Xadow BLE. It is based on TI cc
 
 *   Transmission power: - DBM, 23-6 DBM, 0 DBM, 6 DBM, can be modified by the AT command
 
-*   use TI CC2540 chip, configuration space of 256 KB, support the AT command, the user can according to need to change the role (master, slave mode) and the serial port baud rate, name of equipment, matching parameters such as passwords, use agile.
+*   use TI CC2541 chip, configuration space of 256 KB, support the AT command, the user can according to need to change the role (master, slave mode) and the serial port baud rate, name of equipment, matching parameters such as passwords, use agile.
 
 *   power supply: + 3.3 VDC 50 mA
 
@@ -299,17 +299,28 @@ This is a SMD BLE module used in our BLE Bee and Xadow BLE. It is based on TI cc
 ---
 **1）	Query the native MAC address
 **
-Send: AT + ADDR?
+Send: AT+ADDR?
 
-Send after a successful return: OK + LADD: MAC address (address for 12 string)
+Send after a successful return: OK+LADD: MAC address (address for 12 string)
 
 **2）	Query the baud rate
 **
 Send: AT+BAUD?
 
-Send after a successful return: OK + Get: [para1]
+Send after a successful return: OK+Get: [para1]
 
-Scope of para1:0 ~ 8. The parameters corresponding to: 0 represents 9600, 1, 2, 9600, 38400, on behalf of the representative representative of 57600, 115200, 5, 4800, 6, 7 represents 1200, 1200 2400. The default baud rate to 9600.
+Scope of para1:0 ~ 8. The parameters corresponding lists as below:
+
+0 -------- 9600<br>
+1 -------- 19200<br>
+2 -------- 38400<br>
+3 -------- 57600<br>
+4 -------- 115200<br>
+5 -------- 4800<br>
+6 -------- 2400<br>
+7 -------- 1200<br>
+8 -------- 230400<br>
+Default: 0(9600)
 
 **3）	Set the baud rate
 **
@@ -317,7 +328,7 @@ Send: AT+BAUD[para1]
 
 Send after a successful return: OK+Set:[para1]
 
-Example: send: AT + BAUD1, return: OK + Set: 2.The baud rate is set to 19200.
+Example: send: AT + BAUD1, return: OK+Set: 2.The baud rate is set to 19200.
 
 Note: after the switch to the 1200, module will no longer support the configurations of the AT command, and press the PIO0 under standby, module can restore the factory Settings.Do not recommend using the baud rate.After setting the baud rate, modules should be on electricity, anew set parameters can take effect.
 
@@ -329,72 +340,72 @@ Send after a successful return: OK+CONN[para2]
 
 Para2 range is: A, E, F
 
-Example: from the bluetooth address is: 0017EA0943AE, sending the AT + CON0017EA0943AE, module returns: OK + CONNA or OK + + CONNF CONNE or OK.
+Example: from the bluetooth address is: 0017EA0943AE, sending the AT+CON0017EA0943AE, module returns: OK+CONNA or OK+CONNF CONNE or OK.
 
 **5）	removal equipment matching information
 **
-Send: AT + CLEAR
+Send: AT+CLEAR
 
-Send after a successful return: OK + CLEAR
+Send after a successful return: OK+CLEAR
 
 Clear success had connected device address code information.
 
 **6）	query module working mode
 **
-Send: AT + MODE?
+Send: AT+MODE?
 
-Send after a successful return: OK + Get: [para]
+Send after a successful return: OK+Get: [para]
 
 Para: the range of 0 ~ 2. 0 represents passthrough mode, on behalf of the PIO acquisition + remote control + 1 passthrough, 2 representative passthrough + remote control mode.The default is 0.
 
 **7）	set module working mode:
 **
-Send: AT + MODE []
+Send: AT+MODE []
 
-Send after a successful return: OK + Set: [para]
+Send after a successful return: OK+Set: [para]
 
 **8）	query device name
 **
-Send: AT + NAME?
+Send: AT+NAME?
 
-Send after a successful return: OK + NAME [para1]
+Send after a successful return: OK+NAME [para1]
 
 **9）	set the device name
 **
-Send: AT + NAME [para1]
+Send: AT+NAME [para1]
 
-Send after a successful return: OK + Set: [para1]
+Send after a successful return: OK+Set: [para1]
 
 Example: Set the device name to Seeed, sending the AT + NAMESeeed, return OK + Set: Seeed AT this time, the name of the bluetooth module has been changed to Seeed.
 Note: after the instruction execution, required to electricity, set the parameters of the approval.
 
 **10）	query matching password
 **
-Send: AT + PASS?
+Send: AT+PASS?
 
-Send after a successful return: OK + PASS: [para1]
+Send after a successful return: OK+PASS: [para1]
 
 Para1 range is 000000 ~ 999999, the default is 000000.
 
 **11）	pairing set password
 **
-Send the AT + PASS [para1]
+Send the AT+PASS [para1]
 
-Send after a successful return: OK + Set: [para1]
+Send after a successful return: OK+Set: [para1]
 
 **12）	restore factory Settings
 **
-The AT + RENEW send
+The AT+RENEW send
 
-Send after a successful return: OK + RENEW
+Send after a successful return: OK+RENEW
 
 Restore the default factory Settings module, the module Settings will be reset so, back to the factory with the status of the factory default, delay module 500 ms after the restart.If no need, please be careful.
 
 **13）	module reset
 **
-Send: AT + RESET
+Send: AT+RESET
 
-Send after a successful return: OK + RESET
+Send after a successful return: OK+RESET
 
 After the instruction execution module will delay 500 ms after the restart.
 
@@ -402,7 +413,7 @@ After the instruction execution module will delay 500 ms after the restart.
 **
 Send: AT + ROLE [para1]
 
-Send after a successful return: OK + Set: [para1]
+Send after a successful return: OK+Set: [para1]
 
 ##    Example Code
 ---
